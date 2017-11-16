@@ -11,21 +11,21 @@ public class Manfut {
 
         // Procesar argumentos.
         if (args.length<2)
-            throw new IllegalArgumentException("Error in arguments: ManFut <presupost> <fitxer_jugadors>");
+            throw new IllegalArgumentException("Error en els arguments: ManFut <presupost> <fitxer_jugadors>");
 
         PresupostFitxatges = Integer.parseInt(args[0]);
         PlayersMarket = new Market();
 
          err = PlayersMarket.LlegirFitxerJugadors(args[1]);
          if (err!=Error.COk)
-             Error.showError("[Manfut] ERROR Reading players file.");
+             Error.showError("[Manfut] ERROR Llegint el fitxer de jugadors.");
 
         // Calculate the best team.
         MillorEquip=PlayersMarket.CalcularEquipOptim(PresupostFitxatges);
         System.out.print(Error.color_blue);
-        System.out.println("-- Best Team -------------------------------------------------------------------------------------");
+        System.out.println("-- Millor Equip -------------------------------------------------------------------------------------");
         MillorEquip.PrintEquipJugadors();
-        System.out.println("   Cost " + MillorEquip.CostEquip() +", Points: " + MillorEquip.PuntuacioEquip() + ".");
+        System.out.println("   Cost " + MillorEquip.CostEquip() +", Punts: " + MillorEquip.PuntuacioEquip() + ".");
         System.out.println("--------------------------------------------------------------------------------------------------");
         System.out.print(Error.end_color);
 

@@ -79,7 +79,7 @@ public class Market {
                         break;
 
                     default:
-                        System.err.println("[Market:LlegirFitxerJugadors] Error player type.");
+                        System.err.println("[Market:LlegirFitxerJugadors] Error tipus de jugador.");
                         return(Error.CErrorPlayerType);
                 }
 
@@ -98,7 +98,7 @@ public class Market {
             br.close();
 
         } catch (IOException e) {
-            System.err.println("[Market:LlegirFitxerJugadors] Reading file "+pathJugadors+".");
+            System.err.println("[Market:LlegirFitxerJugadors] Llegint fitxer "+pathJugadors+".");
             e.printStackTrace();
             return(Error.CErrorReadingFile);
         }
@@ -119,14 +119,14 @@ public class Market {
         // Calculated number of bits required for all teams codification.
         maxbits=Manfut.Log2(NPorters)*JugadorsEquip.DPosPorters+Manfut.Log2(NDefensors)*JugadorsEquip.DPosDefensors+Manfut.Log2(NMitjos)*JugadorsEquip.DPosMitjos+Manfut.Log2(NDelanters)*JugadorsEquip.DPosDelanters;
         if (maxbits>Manfut.Log2(Long.MAX_VALUE))
-            Error.showError("[Market:CalcularEquipOptim] The number of player overflow the maximum width supported.");
+            Error.showError("[Market:CalcularEquipOptim] El nombre de jugadors supera el màxim tamany.");
 
         // Calculate first and end team that have to be evaluated.
         first=primerEquip=GetEquipInicial();
         end=ultimEquip=(int)Math.pow(2,maxbits);
 
         // Evaluating different teams/combinations.
-        System.out.println("Evaluating form " + String.format("%x",first) + "H to " + String.format("%x",end) + "H (Maxbits: "+ maxbits + "). Evaluating "+ (end-first)+"  teams...");
+        System.out.println("Evaluant de " + String.format("%x",first) + "H a " + String.format("%x",end) + "H (Maxbits: "+ maxbits + "). Evaluant "+ (end-first)+"  equips...");
         for (equip=first;equip<=end;equip++)
         {
             JugadorsEquip jugadors;
@@ -148,11 +148,11 @@ public class Market {
             // Chech if the team points is bigger than current optimal team, then evaluate if the cost is lower than the available budget
             if (jugadors.PuntuacioEquip()>MaxPuntuacio && jugadors.CostEquip()<PresupostFitxatges)
             {
-                System.out.print("Team " + equip + "->");
+                System.out.print("Equip " + equip + "->");
                 // We have a new partial optimal team.
                 MaxPuntuacio=jugadors.PuntuacioEquip();
                 MillorEquip = jugadors;
-                System.out.println(Error.color_green + " Cost: " + jugadors.CostEquip() + " Points: " + jugadors.PuntuacioEquip() + ". "+ Error.end_color);
+                System.out.println(Error.color_green + " Cost: " + jugadors.CostEquip() + " Punts: " + jugadors.PuntuacioEquip() + ". "+ Error.end_color);
             }
             else
             {
