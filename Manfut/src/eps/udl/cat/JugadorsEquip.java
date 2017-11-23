@@ -1,4 +1,7 @@
 package eps.udl.cat;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 
 class IdEquip {
     static int  IdCount=1;
@@ -151,12 +154,12 @@ public class JugadorsEquip {
     {
         int x;
 
-        System.out.print("   Porters: ");
+        System.out.println(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("GOALKEEPER"));
         myMarket.GetPorter(Porter).printCostPunts();
         System.out.println();
 
 
-        System.out.print("   Defenses: ");
+        System.out.println(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("DEFENCES"));
         for(x=0;x<DPosDefensors;x++)
         {
             myMarket.GetDefensor(Defensors[x]).printCostPunts();
@@ -164,7 +167,7 @@ public class JugadorsEquip {
         }
         System.out.println();
 
-        System.out.print("   Mitjos: ");
+        System.out.println(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("MIDDLE"));
         for(x=0;x<DPosMitjos;x++)
         {
             myMarket.GetMitg(Mitjos[x]).printCostPunts();
@@ -172,7 +175,7 @@ public class JugadorsEquip {
         }
         System.out.println();
 
-        System.out.print("   Delanters: ");
+        System.out.println(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("FRONT"));
         for(x=0;x<DPosDelanters;x++)
         {
             myMarket.GetDelanter(Delanters[x]).printCostPunts();

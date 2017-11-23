@@ -1,9 +1,16 @@
 package eps.udl.cat;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Manfut {
 
     public static void main(String[] args)
     {
+
+        String language;
+        String country;
+
         Market          PlayersMarket;
         int             PresupostFitxatges;
         JugadorsEquip   MillorEquip;
@@ -11,21 +18,21 @@ public class Manfut {
 
         // Procesar argumentos.
         if (args.length<2)
-            throw new IllegalArgumentException("Error en els arguments: ManFut <presupost> <fitxer_jugadors>");
+            throw new IllegalArgumentException(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("ERR_ARGUMENTS"));
 
         PresupostFitxatges = Integer.parseInt(args[0]);
         PlayersMarket = new Market();
 
          err = PlayersMarket.LlegirFitxerJugadors(args[1]);
          if (err!=Error.COk)
-             Error.showError("[Manfut] ERROR Llegint el fitxer de jugadors.");
+             System.err.println("[Manfut]" + ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("ERR_READING_FILE"));
 
         // Calculate the best team.
         MillorEquip=PlayersMarket.CalcularEquipOptim(PresupostFitxatges);
         System.out.print(Error.color_blue);
-        System.out.println("-- Millor Equip -------------------------------------------------------------------------------------");
+        System.out.println(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("BEST_TEAM"));
         MillorEquip.PrintEquipJugadors();
-        System.out.println("   Cost " + MillorEquip.CostEquip() +", Punts: " + MillorEquip.PuntuacioEquip() + ".");
+        System.out.println(ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("COST") + MillorEquip.CostEquip() +ResourceBundle.getBundle("ResourceBundles", Locale.getDefault()).getString("POINTS") + MillorEquip.PuntuacioEquip() + ".");
         System.out.println("--------------------------------------------------------------------------------------------------");
         System.out.print(Error.end_color);
 
